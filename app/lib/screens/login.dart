@@ -107,8 +107,8 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     width: 10,
                   ),
-                  GestureDetector(
-                    onTap: () {
+                  TextButton(
+                    onPressed: () {
                       // pull the ExpandableListView
                       Navigator.pushNamed(context, '/signup');
                     },

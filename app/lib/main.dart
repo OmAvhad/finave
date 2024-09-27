@@ -5,6 +5,7 @@ import 'screens/signup.dart';
 import 'screens/history.dart';
 import 'screens/landing.dart';
 import 'screens/profile.dart';
+import 'screens/analytics.dart';
 
 void main() {
   runApp(const MyApp());
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/home': (context) => const MyHomePage(),
         '/history': (context) => const HistoryPage(),
         '/profile': (context) => const ProfilePage(),
+        '/analytics': (context) => const AnalyticsPage(),
       },
     );
   }

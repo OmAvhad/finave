@@ -25,7 +25,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Future<void> _loadTransactions() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     List<String>? transactionList = prefs.getStringList('transactions');
-
     if (transactionList != null) {
       setState(() {
         transactions = transactionList
@@ -112,6 +111,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    int _selectedIndex = 0;
+
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       body: SafeArea(
@@ -226,6 +227,7 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -236,24 +238,33 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'History',
           ),
           BottomNavigationBarItem(
+            icon: Icon(Icons.pie_chart),
+            label: 'Analytics',
+          ),
+          BottomNavigationBarItem(
             icon: Icon(Icons.person_2_rounded),
             label: 'Profile',
           ),
         ],
-        currentIndex: 0,
+        // currentIndex: _selectedIndex,
         selectedItemColor: Theme.of(context).colorScheme.primary,
         onTap: (int index) {
-          // Handle navigation to different screens here
-          if (index == 1) {
-            Navigator.pushNamed(
-              context,
-              '/history',
-            );
-          } else if (index == 2) {
-            Navigator.pushNamed(
-              context,
-              '/profile',
-            );
+          setState(() {
+            _selectedIndex = index;
+          });
+          switch (index) {
+            case 0:
+              Navigator.pushNamed(context, '/home');
+              break;
+            case 1:
+              Navigator.pushNamed(context, '/history');
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/analytics');
+              break;
+            case 3:
+              Navigator.pushNamed(context, '/profile');
+              break;
           }
         },
       ),
